@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    </head>
+  <body>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+    var count = <%- count %>;
+    function addRow(e) { 
+    	var table = document.getElementById("table");
+		var row = table.insertRow(count + 1);
+		var cell1 = row.insertCell(0);
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+		cell1.innerHTML = '<input type="text" id="loc<%= count %>">';
+		cell2.innerHTML = '<input type="text" id="freqa<%= count %>"> per dropdown';
+		cell3.innerHTML = '<input type="checkbox" id="metha<%= count %>">Walk' + 
+    		'<input type="checkbox" id="methb<%= count %>">Transit' + 
+    		'<input type="checkbox" id="methc<%= count %>">Drive';
+    }
+    </script>
+    <div>
+    <form onSubmit="submit()"> 
+	<input type="text" id="city"><br>
+	<input type="submit" value="Submit">
+    </div>
+    <table id="table">
+    	<tr>
+    		<td>Location</td>
+    		<td>Frequency</td>
+    		<td>Method of Transport</td>
+    	</tr><% for(var i = 0; i < arr.length; i++) { %>
+  		<tr>
+    		<td><input type="text" id="loc<%= i %>"></td>
+    		<td><input type="text" id="freqa<%= i %>"> per dropdown</td>
+    		<td><input type="checkbox" id="metha<%= i %>">Walk
+    		<input type="checkbox" id="methb<%= i %>">Transit
+    		<input type="checkbox" id="methc<%= i %>">Drive</td>
+    	</tr><% } %>
+    	<tr><td><button id="add" onClick="addRow(event)">Add a new row!</button></td></tr>
+    </table>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=ID&callback=initMap"
+    async defer></script>
+  </body>
+</html>

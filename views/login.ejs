@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script> 
+	function submit() {
+        $.ajax({
+            url: checklogin,
+            type: 'POST',
+            success: function(results) {
+            }
+        });
+    }
+</script>
+</head>
+<body>
+<center><h1>Login</h1></center>
+<form action="/checklogin" method="post" onSubmit="submit()"> 
+<input type="text" id="uname"><br>
+<input type="text" id="pword"><br>
+<input type="submit" value="Submit">
+</body>
+</html>
